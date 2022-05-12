@@ -12,6 +12,7 @@ def init_spark_context():
     return sc
  
  
+# TODO: replace this server with Heroku
 def run_server(app):
  
     # Enable WSGI access logging via Paste

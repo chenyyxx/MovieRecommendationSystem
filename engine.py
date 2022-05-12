@@ -114,7 +114,7 @@ class RecommendationEngine:
 
         # Train the model
         self.rank = 8
-        self.seed = 5L
+        self.seed = 5
         self.iterations = 10
         self.regularization_parameter = 0.1
         self.__train_model()
