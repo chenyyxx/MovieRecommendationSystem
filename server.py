@@ -8,6 +8,7 @@ def init_spark_context():
     conf = SparkConf().setAppName("movie_recommendation-server")
     # IMPORTANT: pass aditional Python modules to each worker
     sc = SparkContext(conf=conf, pyFiles=['engine.py', 'app.py'])
+    sc.setCheckpointDir('/tmp')
  
     return sc
  
@@ -25,7 +26,7 @@ def run_server(app):
     cherrypy.config.update({
         'engine.autoreload.on': True,
         'log.screen': True,
-        'server.socket_port': 5432,
+        'server.socket_port': 8080,
         'server.socket_host': '0.0.0.0'
     })
  
@@ -37,7 +38,7 @@ def run_server(app):
 if __name__ == "__main__":
     # Init spark context and load libraries
     sc = init_spark_context()
-    dataset_path = os.path.join('datasets', 'ml-latest')
+    dataset_path = os.path.join('data', 'ml-latest')
     app = create_app(sc, dataset_path)
  
     # start web server
